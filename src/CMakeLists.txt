@@ -1,15 +1,14 @@
+cmake_minimum_required(VERSION 3.10)
+project(PrimeLibrary)
 
-include_directories(${${PROJECT_NAME}_SOURCE_DIR}/include)
-set(header ${${PROJECT_NAME}_SOURCE_DIR}/include)
-set(src ${${PROJECT_NAME}_SOURCE_DIR}/src/alg.cpp)
+set(CMAKE_CXX_STANDARD 17)
 
-message(PROJECT_SOURCE_DIR="${src}")
+# Include directory
+include_directories(include)
 
-add_library(${PROJECT_NAME} SHARED
-  ${header}
-  ${src})
-  
-add_executable(${PROJECT_NAME}.info main.cpp)
-target_link_libraries(${PROJECT_NAME}.info ${PROJECT_NAME})
+# Source files
+add_library(prime_lib STATIC src/alg.cpp)
 
-#file(COPY ${${PROJECT_NAME}_SOURCE_DIR}/src/checker.py DESTINATION "/home/runner/work/ADS-0/ADS-0")
+# Test executable
+add_executable(tests tests/test.cpp)
+target_link_libraries(tests prime_lib)
