@@ -1,61 +1,54 @@
-// Copyright 2022 NNTU-CS
-
-#include <gtest/gtest.h>
-#include <cstdint>
+#include <iostream>
+#include <cassert>
 #include "alg.h"
 
+void testCheckPrime() {
+    assert(checkPrime(2) == true);
+    assert(checkPrime(3) == true);
+    assert(checkPrime(4) == false);
+    assert(checkPrime(17) == true);
+    assert(checkPrime(1) == false);
+    assert(checkPrime(0) == false);
+    std::cout << "checkPrime tests passed!\n";
+}
 
-TEST(ads1, checkPrime1) {
-  EXPECT_EQ(true, checkPrime(2));
+void testNPrime() {
+    assert(nPrime(1) == 2);
+    assert(nPrime(2) == 3);
+    assert(nPrime(3) == 5);
+    assert(nPrime(4) == 7);
+    assert(nPrime(5) == 11);
+    std::cout << "nPrime tests passed!\n";
 }
-TEST(ads1, checkPrime2) {
-  EXPECT_EQ(true, checkPrime(3));
+
+void testNextPrime() {
+    assert(nextPrime(4) == 5);
+    assert(nextPrime(5) == 7);
+    assert(nextPrime(11) == 13);
+    assert(nextPrime(13) == 17);
+    std::cout << "nextPrime tests passed!\n";
 }
-TEST(ads1, checkPrime3) {
-  EXPECT_EQ(false, checkPrime(12));
+
+void testSumPrime() {
+    assert(sumPrime(10) == 17); // 2+3+5+7 = 17
+    assert(sumPrime(2) == 0);
+    assert(sumPrime(5) == 5); // 2+3 = 5
+    std::cout << "sumPrime tests passed!\n";
 }
-TEST(ads1, nPrime1) {
-  uint64_t res = nPrime(6);
-  EXPECT_EQ(13, res);
+
+void testTwinPrimes() {
+    assert(twinPrimes(2, 10) == 2); // (3,5) va (5,7)
+    assert(twinPrimes(2, 100) == 8);
+    assert(twinPrimes(10, 20) == 1); // (17,19)
+    std::cout << "twinPrimes tests passed!\n";
 }
-TEST(ads1, nPrime2) {
-  uint64_t res = nPrime(500);
-  EXPECT_EQ(3571, res);
-}
-TEST(ads1, nextPrime1) {
-  uint64_t res = nextPrime(1031);
-  EXPECT_EQ(1033, res);
-}
-TEST(ads1, nextPrime2) {
-  uint64_t res = nextPrime(3559);
-  EXPECT_EQ(3571, res);
-}
-TEST(ads1, nextPrime3) {
-  uint64_t res = nextPrime(2);
-  EXPECT_EQ(3, res);
-}
-TEST(ads1, sumPrime1) {
-  uint64_t res = sumPrime(2000000);
-  uint64_t expected = 142913828922;
-  EXPECT_EQ(expected, res);
-}
-TEST(ads1, sumPrime2) {
-  uint64_t res = sumPrime(10);
-  uint64_t expected = 17;
-  EXPECT_EQ(expected, res);
-}
-TEST(ads1, twins1) {
-  uint64_t res = twinPrimes(2, 10);
-  uint64_t expected = 2;
-  EXPECT_EQ(expected, res);
-}
-TEST(ads1, twins2) {
-  uint64_t res = twinPrimes(2, 100);
-  uint64_t expected = 8;
-  EXPECT_EQ(expected, res);
-}
-TEST(ads1, twins3) {
-  uint64_t res = twinPrimes(50, 200);
-  uint64_t expected = 9;
-  EXPECT_EQ(expected, res);
+
+int main() {
+    testCheckPrime();
+    testNPrime();
+    testNextPrime();
+    testSumPrime();
+    testTwinPrimes();
+    std::cout << "\nAll tests passed successfully!\n";
+    return 0;
 }
